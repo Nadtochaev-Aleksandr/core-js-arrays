@@ -42,8 +42,23 @@ function getIntervalArray(start, end) {
  *    sumArrays([10, 20, 30], [5, 10, 15]) => [15, 30, 45]
  *    sumArrays([-1, 0, 1], [1, 2, 3, 4]) => [0, 2, 4, 4]
  */
-function sumArrays(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function sumArrays(arr1, arr2) {
+  if (!Array.isArray(arr1) || !Array.isArray(arr2)) {
+    throw new Error('В качестве параметров переданы не массивы');
+  }
+  let resultArray;
+  if (arr1.length >= arr2.length) {
+    resultArray = arr2.map((arr2Element, i) => arr2Element + arr1[i]);
+    for (let i = arr2.length; i < arr1.length; i += 1) {
+      resultArray.push(arr1[i]);
+    }
+  } else {
+    resultArray = arr1.map((arr1Element, i) => arr1Element + arr2[i]);
+    for (let i = arr1.length; i < arr2.length; i += 1) {
+      resultArray.push(arr2[i]);
+    }
+  }
+  return resultArray;
 }
 
 /**
@@ -58,8 +73,8 @@ function sumArrays(/* arr1, arr2 */) {
  *    findElement(['Array', 'Number', 'string'], 'Date') => -1
  *    findElement([0, 1, 2, 3, 4, 5], 5) => 5
  */
-function findElement(/* arr, value */) {
-  throw new Error('Not implemented');
+function findElement(arr, value) {
+  return arr.indexOf(value);
 }
 
 /**
@@ -76,8 +91,14 @@ function findElement(/* arr, value */) {
  *    findAllOccurrences([ null, undefined, null ], null) => 2
  *    findAllOccurrences([ true, 0, 1, 'true' ], true) => 1
  */
-function findAllOccurrences(/* arr, item */) {
-  throw new Error('Not implemented');
+function findAllOccurrences(arr, item) {
+  let container = 0;
+  for (let i = 0; i < arr.length; i += 1) {
+    if (arr[i] === item) {
+      container += 1;
+    }
+  }
+  return container;
 }
 
 /**
