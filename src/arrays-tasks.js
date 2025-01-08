@@ -48,15 +48,15 @@ function sumArrays(arr1, arr2) {
   }
   let resultArray;
   if (arr1.length >= arr2.length) {
-    resultArray = arr2.map((arr2Element, i) => arr2Element + arr1[i]);
-    for (let i = arr2.length; i < arr1.length; i += 1) {
-      resultArray.push(arr1[i]);
-    }
+    const zeroArray = Array(arr1.length - arr2.length);
+    zeroArray.fill(0);
+    const longerArr2 = arr2.concat(zeroArray);
+    resultArray = arr1.map((arr1Element, i) => arr1Element + longerArr2[i]);
   } else {
-    resultArray = arr1.map((arr1Element, i) => arr1Element + arr2[i]);
-    for (let i = arr1.length; i < arr2.length; i += 1) {
-      resultArray.push(arr2[i]);
-    }
+    const zeroArray = Array(arr2.length - arr1.length);
+    zeroArray.fill(0);
+    const longerArr1 = arr1.concat(zeroArray);
+    resultArray = arr2.map((arr2Element, i) => arr2Element + longerArr1[i]);
   }
   return resultArray;
 }
@@ -113,8 +113,24 @@ function findAllOccurrences(arr, item) {
  *    removeFalsyValues([ 1, 2, 3, 4, 5, 'false' ]) => [ 1, 2, 3, 4, 5, 'false' ]
  *    removeFalsyValues([ false, 0, NaN, '', undefined ]) => [ ]
  */
-function removeFalsyValues(/* arr */) {
-  throw new Error('Not implemented');
+function removeFalsyValues(arr) {
+  if (!Array.isArray(arr)) {
+    throw new Error('В качестве параметра передан не массив');
+  }
+  for (let i = 0; i < arr.length; i += 1) {
+    if (
+      arr[i] === false ||
+      arr[i] === null ||
+      arr[i] === 0 ||
+      arr[i] === '' ||
+      arr[i] === undefined ||
+      Number.isNaN(arr[i])
+    ) {
+      arr.splice(i, 1);
+      i -= 1;
+    }
+  }
+  return arr;
 }
 
 /**
