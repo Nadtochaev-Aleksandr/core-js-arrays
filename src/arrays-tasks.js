@@ -93,13 +93,16 @@ function findElement(arr, value) {
  */
 function findAllOccurrences(arr, item) {
   let container = 0;
-  for (let i = 0; i < arr.length; i += 1) {
-    if (arr[i] === item) {
-      container += 1;
-    }
-  }
+  const newArr = arr.filter((value) => value === item);
+  container = newArr.length;
   return container;
 }
+
+// for (let i = 0; i < arr.length; i += 1) {
+//   if (arr[i] === item) {
+//     container += 1;
+//   }
+// }
 
 /**
  * Removes falsy values from the specified array.
@@ -117,21 +120,36 @@ function removeFalsyValues(arr) {
   if (!Array.isArray(arr)) {
     throw new Error('В качестве параметра передан не массив');
   }
-  for (let i = 0; i < arr.length; i += 1) {
+  function checkCondition(value) {
     if (
-      arr[i] === false ||
-      arr[i] === null ||
-      arr[i] === 0 ||
-      arr[i] === '' ||
-      arr[i] === undefined ||
-      Number.isNaN(arr[i])
+      value === false ||
+      value === null ||
+      value === 0 ||
+      value === '' ||
+      value === undefined ||
+      Number.isNaN(value)
     ) {
-      arr.splice(i, 1);
-      i -= 1;
+      return false;
     }
+    return true;
   }
-  return arr;
+  const newArr = arr.filter((value) => checkCondition(value));
+  return newArr;
 }
+
+// for (let i = 0; i < arr.length; i += 1) {
+//   if (
+//     arr[i] === false ||
+//     arr[i] === null ||
+//     arr[i] === 0 ||
+//     arr[i] === '' ||
+//     arr[i] === undefined ||
+//     Number.isNaN(arr[i])
+//   ) {
+//     arr.splice(i, 1);
+//     i -= 1;
+//   }
+// }
 
 /**
  * Returns an array containing the lengths of each string in a specified array of strings.
@@ -143,8 +161,12 @@ function removeFalsyValues(arr) {
  *    getStringsLength([ '', 'a', 'bc', 'def', 'ghij' ]) => [ 0, 1, 2, 3, 4 ]
  *    getStringsLength([ 'angular', 'react', 'ember' ]) => [ 7, 5, 5 ]
  */
-function getStringsLength(/* arr */) {
-  throw new Error('Not implemented');
+function getStringsLength(arr) {
+  if (!Array.isArray(arr)) {
+    throw new Error('В качестве параметра передан не массив');
+  }
+  const newArr = arr.map((value) => value.length);
+  return newArr;
 }
 
 /**
@@ -161,8 +183,16 @@ function getStringsLength(/* arr */) {
  *   getAverage([ 1, 10, 100, 1000 ])  => 277,75
  *   getAverage([ 2, 3, 3 ])  => 2,67
  */
-function getAverage(/* arr */) {
-  throw new Error('Not implemented');
+function getAverage(arr) {
+  if (!Array.isArray(arr)) {
+    throw new Error('В качестве параметра передан не массив');
+  }
+  if (arr.length === 0) {
+    return 0;
+  }
+  const sumOfArrElements = arr.reduce((a, b) => a + b);
+  const result = Math.round((sumOfArrElements / arr.length) * 100) / 100;
+  return result;
 }
 
 /**
