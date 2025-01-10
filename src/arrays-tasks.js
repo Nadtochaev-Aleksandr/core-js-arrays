@@ -352,8 +352,11 @@ function doubleArray(arr) {
  *    toStringList([1, 2, 3, 4, 5]) => '1,2,3,4,5'
  *    toStringList(['rock', 'paper', 'scissors']) => 'rock,paper,scissors'
  */
-function toStringList(/* arr */) {
-  throw new Error('Not implemented');
+function toStringList(arr) {
+  if (!Array.isArray(arr)) {
+    throw new Error('В качестве параметра передан не массив');
+  }
+  return arr.join();
 }
 
 /**
