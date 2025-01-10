@@ -230,9 +230,31 @@ function isSameLength(arr) {
  *    isValueEqualsIndex([2, 1, 0, 4, 5]) => true
  *    isValueEqualsIndex([10, 20, 30, 40, 50]) => false
  */
-function isValueEqualsIndex(/* arr */) {
-  throw new Error('Not implemented');
+function isValueEqualsIndex(arr) {
+  if (!Array.isArray(arr)) {
+    throw new Error('В качестве параметра передан не массив');
+  }
+  if (arr.length === 0) {
+    throw new Error('В качестве параметра передан пустой массив');
+  }
+  if (arr.some((element, index) => element === index)) {
+    return true;
+  }
+  return false;
 }
+
+// const referenceArrayString = referenceArray.join('');
+// console.log(referenceArrayString);
+// const newArr = arr.sort();
+// console.log(newArr);
+// const newArrString = newArr.join('');
+// console.log(newArrString);
+// if (referenceArrayString === newArrString) {
+//   console.log(true);
+//   return true;
+// }
+// console.log(false);
+// return false;
 
 /**
  * Inserts the item into specified array at specified index.
