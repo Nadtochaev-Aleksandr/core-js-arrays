@@ -25,7 +25,10 @@ function getIntervalArray(start, end) {
     throw new Error('переданные паратметры не являются числами');
   }
   const arraysLength = end - start + 1;
-  const array = Array.from({ length: arraysLength }, (_, i) => start + i);
+  const array = Array.from(
+    { length: arraysLength },
+    (element, index) => start + index
+  );
   return array;
 }
 
@@ -371,9 +374,26 @@ function toStringList(arr) {
  *   distinct([ 1, 1, 2, 2, 3, 3, 4, 4]) => [ 1, 2, 3, 4]
  *   distinct([]) => []
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  if (!Array.isArray(arr)) {
+    throw new Error('В качестве параметра передан не массив');
+  }
+  const newSet = new Set(arr);
+  const newArr = Array.from(newSet);
+  return newArr;
 }
+
+// if (!Array.isArray(arr)) {
+//   throw new Error('В качестве параметра передан не массив');
+// }
+// function arraysElementsCheck(element, index, array) {
+//   if (index === array.indexOf(element)) {
+//     return true;
+//   }
+//   return false;
+// }
+// const newArr = arr.filter(arraysElementsCheck);
+// return newArr;
 
 /**
  * Creates an n-dimensional array and fills it with zeros.
