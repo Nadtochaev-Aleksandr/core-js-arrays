@@ -601,8 +601,25 @@ function getElementByIndices(arr, indices) {
  *  getFalsyValuesCount([ -1, 'false', null, 0 ]) => 2
  *  getFalsyValuesCount([ null, undefined, NaN, false, 0, '' ]) => 6
  */
-function getFalsyValuesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getFalsyValuesCount(arr) {
+  if (!Array.isArray(arr)) {
+    throw new Error('В качестве параметра передан не массив');
+  }
+  function falseElementsCheck(element) {
+    if (
+      element === false ||
+      element === null ||
+      element === 0 ||
+      element === '' ||
+      element === undefined ||
+      Number.isNaN(element)
+    ) {
+      return true;
+    }
+    return false;
+  }
+  const newArr = arr.filter(falseElementsCheck);
+  return newArr.length;
 }
 
 /**
