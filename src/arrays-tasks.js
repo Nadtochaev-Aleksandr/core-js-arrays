@@ -640,8 +640,18 @@ function getFalsyValuesCount(arr) {
  *                              [0,0,0,1,0],
  *                              [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  if (typeof n !== 'number' || !Number.isInteger(n)) {
+    throw new Error(
+      'В качестве параметра передано не число, либо оно не целое'
+    );
+  }
+  const resultMatrix = Array.from({ length: n }, (rowElement, rowIndex) =>
+    Array.from({ length: n }, (colElement, colIndex) =>
+      rowIndex === colIndex ? 1 : 0
+    )
+  );
+  return resultMatrix;
 }
 
 /**
