@@ -464,8 +464,21 @@ function selectMany(arr, childrenSelector) {
  *   calculateBalance([ [ 10, 8 ], [ 1, 5 ] ])  => (10 - 8) + (1 - 5) = 2 + -4 = -2
  *   calculateBalance([]) => 0
  */
-function calculateBalance(/* arr */) {
-  throw new Error('Not implemented');
+function calculateBalance(arr) {
+  if (!Array.isArray(arr)) {
+    throw new Error('В качестве параметра передан не массив');
+  }
+  function monthBalance(array) {
+    if (!Array.isArray(array)) {
+      throw new Error('В качестве параметра передан не массив');
+    }
+    return array.reduce((a, b) => a - b);
+  }
+  const intermidiateArray = arr.map(monthBalance);
+  const newArr = intermidiateArray.flat(Infinity);
+  let sumArrayElements = 0;
+  sumArrayElements = newArr.reduce((a, b) => a + b);
+  return sumArrayElements;
 }
 
 /**
