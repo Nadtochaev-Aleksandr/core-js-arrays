@@ -535,8 +535,19 @@ function createChunks(arr, chunkSize) {
  *    generateOdds(2) => [ 1, 3 ]
  *    generateOdds(5) => [ 1, 3, 5, 7, 9 ]
  */
-function generateOdds(/* len */) {
-  throw new Error('Not implemented');
+function generateOdds(len) {
+  if (typeof len !== 'number' || !Number.isInteger(len)) {
+    throw new Error(
+      'В качестве параметра передано не число, либо оно не целое'
+    );
+  }
+  if (len < 0) {
+    throw new Error('В качестве параметра передано отрицательное значение');
+  }
+  if (len === 0) {
+    return [];
+  }
+  return Array.from({ length: len }, (element, index) => index * 2 + 1);
 }
 
 /**
@@ -551,9 +562,32 @@ function generateOdds(/* len */) {
  *   getElementByIndices(['one','two','three'], [2]) => 'three'  (arr[2])
  *   getElementByIndices([[[ 1, 2, 3]]], [ 0, 0, 1 ]) => 2        (arr[0][0][1])
  */
-function getElementByIndices(/* arr, indices */) {
-  throw new Error('Not implemented');
+function getElementByIndices(arr, indices) {
+  if (indices.length === 1) {
+    return arr[indices[0]];
+  }
+  let newArr = arr;
+  newArr = newArr[[indices[0]]];
+  indices.shift();
+  return getElementByIndices(newArr, indices);
 }
+
+// let newArr = arr;
+// if (indices.length > 1) {
+//   newArr = newArr[indices[0]];
+//   indices.shift();
+//   getElementByIndices(newArr, indices);
+// }
+// // console.log(`arr = ${arr}`)
+// // console.log(`indices = ${indices}`)
+// // // arr = arr[[indices[0]]];
+// return newArr[indices[0]];
+
+// if (indices.length === 1) {
+//   return arr[indices[0]];
+// }
+// indices.shift();
+// getElementByIndices(arr[0], indices);
 
 /**
  * Returns the number of all falsy values in the specified array.
